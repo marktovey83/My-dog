@@ -74,3 +74,59 @@ input, select, textarea {
   background: white;
 }
 footer { padding: 3rem 0; color: #7a6554; font-family: system-ui, sans-serif; font-size: 0.9rem; }
+
+.profile-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+}
+.profile-wrap {
+  width: min(920px, calc(100% - 2rem));
+  padding: 2rem 0 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+}
+.logo {
+  width: min(420px, 90vw);
+  height: auto;
+}
+.breed-label {
+  font-family: system-ui, sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.picker {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) 1fr;
+  gap: 1.25rem;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .picker { grid-template-columns: 1fr; }
+}
+.picker select {
+  width: 100%;
+  font-family: system-ui, sans-serif;
+}
+.preview {
+  background: var(--white);
+  border: 1px solid #eadfce;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.btn.enter {
+  margin: 1.5rem 0 0;
+  padding: 0.9rem 1.8rem;
+  font-size: 1rem;
+}

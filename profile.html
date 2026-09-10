@@ -6,54 +6,65 @@
   <title>Your dog · Smart Hazel Designs</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
-  <div class="wrap">
-    <header>
-      <a class="brand" href="index.html">Smart Hazel Designs<small>by Smarty and Hazel</small></a>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="profile.html">Your dog</a>
-        <a href="shop.html">Shop</a>
-      </nav>
-    </header>
+<body class="profile-page">
+  <div class="wrap profile-wrap">
+    <img class="logo" src="img/logo.jpg" alt="Smart Hazel Designs by Smarty and Hazel" />
 
-    <section class="hero">
-      <p class="tag">Dog profile</p>
-      <h1>Tell us about your dog.</h1>
-      <p>Saved in this browser for now. Later this becomes an account and the photo is used to try clothes on.</p>
+    <label class="breed-label" for="breed">Choose your breed</label>
+    <div class="picker">
+      <select id="breed">
+        <option value="">Select a breed</option>
+        <option value="labrador">Labrador Retriever</option>
+        <option value="french-bulldog">French Bulldog</option>
+        <option value="golden-retriever">Golden Retriever</option>
+        <option value="german-shepherd">German Shepherd</option>
+        <option value="poodle">Poodle</option>
+        <option value="bulldog">Bulldog</option>
+        <option value="beagle">Beagle</option>
+        <option value="rottweiler">Rottweiler</option>
+        <option value="german-shorthaired-pointer">German Shorthaired Pointer</option>
+        <option value="dachshund">Dachshund</option>
+        <option value="corgi">Pembroke Welsh Corgi</option>
+        <option value="australian-shepherd">Australian Shepherd</option>
+        <option value="yorkshire-terrier">Yorkshire Terrier</option>
+        <option value="cavalier">Cavalier King Charles Spaniel</option>
+        <option value="doberman">Doberman Pinscher</option>
+        <option value="boxer">Boxer</option>
+        <option value="miniature-schnauzer">Miniature Schnauzer</option>
+        <option value="border-collie">Border Collie</option>
+        <option value="siberian-husky">Siberian Husky</option>
+        <option value="shih-tzu">Shih Tzu</option>
+      </select>
+      <div class="preview" id="preview" hidden>
+        <img id="preview-img" alt="Matching family pyjamas" />
+      </div>
+    </div>
 
-      <form id="dog-form">
-        <input name="name" placeholder="Dog name" required />
-        <select name="size">
-          <option>Small</option>
-          <option selected>Medium</option>
-          <option>Large</option>
-        </select>
-        <input name="coat" placeholder="Coat colour, e.g. hazel brown" />
-        <textarea name="notes" rows="3" placeholder="Anything we should know"></textarea>
-        <button class="btn" type="submit">Save profile</button>
-      </form>
-      <p id="saved" hidden>Saved. Next step is the shop.</p>
-    </section>
-
-    <footer>Smart Hazel Designs</footer>
+    <a class="btn enter" href="index.html">Enter the site</a>
   </div>
+
+  <script src="js/breeds-1.js"></script>
+  <script src="js/breeds-2.js"></script>
+  <script src="js/breeds-3.js"></script>
+  <script src="js/breeds-4.js"></script>
   <script>
-    const form = document.getElementById("dog-form");
-    const saved = document.getElementById("saved");
-    const existing = localStorage.getItem("shd-dog");
-    if (existing) {
-      const data = JSON.parse(existing);
-      Object.entries(data).forEach(([k, v]) => {
-        if (form.elements[k]) form.elements[k].value = v;
-      });
+    const select = document.getElementById("breed");
+    const preview = document.getElementById("preview");
+    const img = document.getElementById("preview-img");
+    const saved = localStorage.getItem("shd-breed");
+    if (saved) select.value = saved;
+    function show() {
+      const key = select.value;
+      localStorage.setItem("shd-breed", key);
+      if (key && window.BREED_IMGS && window.BREED_IMGS[key]) {
+        img.src = window.BREED_IMGS[key];
+        preview.hidden = false;
+      } else {
+        preview.hidden = true;
+      }
     }
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(form).entries());
-      localStorage.setItem("shd-dog", JSON.stringify(data));
-      saved.hidden = false;
-    });
+    select.addEventListener("change", show);
+    show();
   </script>
 </body>
 </html>
