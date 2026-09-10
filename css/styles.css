@@ -101,6 +101,15 @@ nav a { color: var(--ink); }
   align-items: center;
   margin-bottom: 0.75rem;
 }
+.film { margin-top: 0.25rem; }
+.film-video {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  background: #3b2a1f;
+  margin: 0.6rem 0 0.8rem;
+  aspect-ratio: 16 / 9;
+}
 .film-frame {
   min-height: 8rem;
   margin: 0.6rem 0 0.8rem;

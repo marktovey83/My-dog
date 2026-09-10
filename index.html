@@ -70,13 +70,14 @@
     <p class="tag">SH film</p>
     <p>A first general film. Breed-by-breed films come next.</p>
     <div class="film" id="film">
-      <div class="film-frame" id="film-frame"></div>
+      <video id="sh-film" class="film-video" playsinline controls preload="none"></video>
       <button class="btn" id="film-play" type="button">Play film</button>
     </div>
   </dialog>
 
   <script src="js/app.js"></script>
   <script src="js/breed-info.js"></script>
+  <script src="js/film.js"></script>
   <script>
     const key = localStorage.getItem("shd-breed") || "golden-retriever";
     const info = (window.SHD_BREEDS && window.SHD_BREEDS[key]) || {
@@ -91,28 +92,38 @@
     document.getElementById("panel-style").textContent = info.style;
 
     const panel = document.getElementById("breed-panel");
+    const video = document.getElementById("sh-film");
+    const playBtn = document.getElementById("film-play");
+    let filmRequested = false;
+
     document.getElementById("sh-hit").addEventListener("click", function () {
       if (panel.showModal) panel.showModal();
       else panel.setAttribute("open", "");
+      if (!filmRequested && window.SHD_loadFilm) {
+        filmRequested = true;
+        playBtn.textContent = "Loading film…";
+        playBtn.disabled = true;
+        window.SHD_loadFilm(video, function (err) {
+          playBtn.disabled = false;
+          playBtn.textContent = err ? "Film unavailable" : "Play film";
+        });
+      }
     });
 
-    const lines = [
-      "Welcome to SH. Your dog already has a story.",
-      info.name + ". " + info.history,
-      info.style,
-      "Tap SH any time. Breed films come next. By Smarty and Hazel."
-    ];
-    const frame = document.getElementById("film-frame");
-    let timer;
-    document.getElementById("film-play").addEventListener("click", function () {
-      let i = 0;
-      clearInterval(timer);
-      frame.textContent = lines[0];
-      timer = setInterval(function () {
-        i += 1;
-        if (i >= lines.length) { clearInterval(timer); return; }
-        frame.textContent = lines[i];
-      }, 4000);
+    playBtn.addEventListener("click", function () {
+      if (!video.src) return;
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+    video.addEventListener("play", function () { playBtn.textContent = "Pause"; });
+    video.addEventListener("pause", function () { playBtn.textContent = "Play film"; });
+    video.addEventListener("ended", function () { playBtn.textContent = "Play film"; });
+
+    panel.addEventListener("close", function () {
+      if (!video.paused) video.pause();
     });
   </script>
 </body>

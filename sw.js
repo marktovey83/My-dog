@@ -1,5 +1,5 @@
-const CACHE = "sh-v1";
-const PRECACHE = ["./", "./profile.html", "./index.html", "./shop.html", "./css/styles.css", "./manifest.json", "./icon.svg"];
+const CACHE = "sh-v2";
+const PRECACHE = ["./", "./profile.html", "./index.html", "./shop.html", "./css/styles.css", "./manifest.json", "./icon.svg", "./js/film.js", "./js/breed-info.js"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(PRECACHE); }));
   self.skipWaiting();
