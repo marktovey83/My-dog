@@ -43,6 +43,24 @@ nav a { color: var(--ink); }
 .hero h1 { margin: 0 0 0.5rem; font-size: clamp(2rem, 5vw, 3.4rem); }
 .hero p { margin: 0 0 1.5rem; max-width: 36rem; }
 
+.sh-hit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  cursor: pointer;
+  color: var(--hazel);
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sh-hit:hover svg { transform: scale(1.04); }
+.sh-hit svg { display: block; transition: transform 0.2s ease; }
+
 .btn {
   display: inline-block;
   background: var(--hazel);
@@ -67,6 +85,32 @@ nav a { color: var(--ink); }
 .card h3 { margin-top: 0; }
 .price { font-family: system-ui, sans-serif; color: var(--green); font-weight: 600; }
 .tag { font-family: system-ui, sans-serif; font-size: 0.75rem; color: var(--hazel); text-transform: uppercase; letter-spacing: 0.08em; }
+
+.breed-panel {
+  width: min(560px, calc(100% - 2rem));
+  border: 1px solid #eadfce;
+  border-radius: 18px;
+  padding: 1.25rem 1.4rem 1.6rem;
+  background: var(--white);
+  color: var(--ink);
+}
+.breed-panel::backdrop { background: rgba(59, 42, 31, 0.45); }
+.panel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+.film-frame {
+  min-height: 8rem;
+  margin: 0.6rem 0 0.8rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #3b2a1f;
+  color: #f6f0e6;
+  display: flex;
+  align-items: center;
+}
 
 form { display: grid; gap: 0.75rem; max-width: 28rem; }
 input, select, textarea {

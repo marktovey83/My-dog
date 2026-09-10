@@ -24,6 +24,14 @@
     </header>
 
     <section class="hero">
+      <button class="sh-hit" id="sh-hit" type="button" aria-haspopup="dialog" aria-controls="breed-panel" title="About your breed">
+        <svg viewBox="0 0 72 72" width="88" height="88" aria-hidden="true">
+          <circle cx="36" cy="36" r="34" fill="#c4a574"/>
+          <circle cx="36" cy="36" r="28" fill="#f6f0e6"/>
+          <text x="36" y="44" text-anchor="middle" font-family="Georgia, Times New Roman, serif" font-size="26" font-weight="700" fill="#8b5e3c">SH</text>
+        </svg>
+        <span>Tap for your breed</span>
+      </button>
       <p class="tag">Australia · dropship first</p>
       <h1>Looks for every good dog.</h1>
       <p id="welcome">Make a profile for your dog, try on a look, then buy toys, treats and gear shipped from Australian suppliers.</p>
@@ -38,7 +46,7 @@
       </article>
       <article class="card">
         <h3>2. Style</h3>
-        <p>Matching family PJs with the SH logo. Grok-styled looks on your dog come next.</p>
+        <p>Tap the SH mark for breed history and what kind of look fits that dog.</p>
       </article>
       <article class="card">
         <h3>3. Shop</h3>
@@ -48,13 +56,64 @@
 
     <footer>SH · by Smarty and Hazel · Website and app</footer>
   </div>
+
+  <dialog class="breed-panel" id="breed-panel">
+    <form method="dialog" class="panel-top">
+      <strong>SH</strong>
+      <button class="btn ghost" value="close" type="submit">Close</button>
+    </form>
+    <h2 id="panel-name">Your breed</h2>
+    <p class="tag">History</p>
+    <p id="panel-history"></p>
+    <p class="tag">What fits their style</p>
+    <p id="panel-style"></p>
+    <p class="tag">SH film</p>
+    <p>A first general film. Breed-by-breed films come next.</p>
+    <div class="film" id="film">
+      <div class="film-frame" id="film-frame"></div>
+      <button class="btn" id="film-play" type="button">Play film</button>
+    </div>
+  </dialog>
+
   <script src="js/app.js"></script>
+  <script src="js/breed-info.js"></script>
   <script>
-    const label = localStorage.getItem("shd-breed-label");
-    if (label) {
-      document.getElementById("welcome").textContent =
-        "Welcome. You picked " + label + ". Browse toys, treats and matching gear shipped from Australian suppliers.";
-    }
+    const key = localStorage.getItem("shd-breed") || "golden-retriever";
+    const info = (window.SHD_BREEDS && window.SHD_BREEDS[key]) || {
+      name: localStorage.getItem("shd-breed-label") || "Your dog",
+      history: "Every breed was shaped for a job. Tap through after you pick a breed on the first page.",
+      style: "We match clothes and gear to that job: soft-mouthed retrievers, working dogs, and companion dogs each get a different look."
+    };
+    const welcome = document.getElementById("welcome");
+    welcome.textContent = "Welcome. You picked " + info.name + ". Tap the SH mark for history, style, and a short film.";
+    document.getElementById("panel-name").textContent = info.name;
+    document.getElementById("panel-history").textContent = info.history;
+    document.getElementById("panel-style").textContent = info.style;
+
+    const panel = document.getElementById("breed-panel");
+    document.getElementById("sh-hit").addEventListener("click", function () {
+      if (panel.showModal) panel.showModal();
+      else panel.setAttribute("open", "");
+    });
+
+    const lines = [
+      "Welcome to SH. Your dog already has a story.",
+      info.name + ". " + info.history,
+      info.style,
+      "Tap SH any time. Breed films come next. By Smarty and Hazel."
+    ];
+    const frame = document.getElementById("film-frame");
+    let timer;
+    document.getElementById("film-play").addEventListener("click", function () {
+      let i = 0;
+      clearInterval(timer);
+      frame.textContent = lines[0];
+      timer = setInterval(function () {
+        i += 1;
+        if (i >= lines.length) { clearInterval(timer); return; }
+        frame.textContent = lines[i];
+      }, 4000);
+    });
   </script>
 </body>
 </html>
