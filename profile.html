@@ -8,25 +8,14 @@
 </head>
 <body class="profile-page">
   <div class="wrap profile-wrap">
-    <div class="logo-lockup" aria-label="Smart Hazel Designs by Smarty and Hazel">
-      <svg class="logo-mark" viewBox="0 0 64 64" width="54" height="54" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#c4a574"/>
-        <path d="M20 36c6-14 18-14 24 0-4-6-8-8-12-8s-8 2-12 8z" fill="#8b5e3c"/>
-        <path d="M32 22c2 6 8 10 8 16 0 6-4 10-8 10s-8-4-8-10c0-6 6-10 8-16z" fill="#f6f0e6"/>
-      </svg>
-      <div>
-        <div class="logo-name">Smart Hazel</div>
-        <div class="logo-sub">Designs</div>
-        <div class="logo-by">by Smarty and Hazel</div>
-      </div>
-    </div>
+    <img id="logo" class="logo" alt="Smart Hazel Designs by Smarty and Hazel" />
 
     <label class="breed-label" for="breed">Choose your breed</label>
     <div class="picker">
       <select id="breed">
         <option value="">Select a breed</option>
-        <option value="labrador">Labrador Retriever</option>
         <option value="french-bulldog">French Bulldog</option>
+        <option value="labrador">Labrador Retriever</option>
         <option value="golden-retriever">Golden Retriever</option>
         <option value="german-shepherd">German Shepherd</option>
         <option value="poodle">Poodle</option>
@@ -54,27 +43,34 @@
     <a class="btn enter" href="index.html">Enter the site</a>
   </div>
 
+  <script src="js/logo.js"></script>
   <script src="js/breeds-1.js"></script>
   <script src="js/breeds-2.js"></script>
   <script src="js/breeds-3.js"></script>
   <script src="js/breeds-4.js"></script>
   <script>
+    const logo = document.getElementById("logo");
+    if (window.SHD_LOGO) logo.src = window.SHD_LOGO;
+
     const select = document.getElementById("breed");
     const preview = document.getElementById("preview");
     const img = document.getElementById("preview-img");
     const saved = localStorage.getItem("shd-breed");
     if (saved) select.value = saved;
+
     function show() {
       const key = select.value;
       localStorage.setItem("shd-breed", key);
-      if (!key) { preview.hidden = true; return; }
+      if (!key) {
+        preview.hidden = true;
+        return;
+      }
       if (window.BREED_IMGS && window.BREED_IMGS[key]) {
         img.src = window.BREED_IMGS[key];
-      } else {
-        img.src = "img/" + key + ".jpg";
       }
       preview.hidden = false;
     }
+
     select.addEventListener("change", show);
     show();
   </script>
