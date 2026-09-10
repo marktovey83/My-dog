@@ -70,7 +70,10 @@
     <p class="tag">SH film</p>
     <p>A first general film. Breed-by-breed films come next.</p>
     <div class="film" id="film">
-      <video id="sh-film" class="film-video" playsinline controls preload="none"></video>
+      <video id="sh-film" class="film-video" playsinline controls preload="metadata">
+        <source src="media/SH-breed-style.mp4" type="video/mp4" />
+        <source src="https://litter.catbox.moe/j3dw69.mp4" type="video/mp4" />
+      </video>
       <button class="btn" id="film-play" type="button">Play film</button>
     </div>
   </dialog>
@@ -94,29 +97,15 @@
     const panel = document.getElementById("breed-panel");
     const video = document.getElementById("sh-film");
     const playBtn = document.getElementById("film-play");
-    let filmRequested = false;
 
     document.getElementById("sh-hit").addEventListener("click", function () {
       if (panel.showModal) panel.showModal();
       else panel.setAttribute("open", "");
-      if (!filmRequested && window.SHD_loadFilm) {
-        filmRequested = true;
-        playBtn.textContent = "Loading film…";
-        playBtn.disabled = true;
-        window.SHD_loadFilm(video, function (err) {
-          playBtn.disabled = false;
-          playBtn.textContent = err ? "Film unavailable" : "Play film";
-        });
-      }
     });
 
     playBtn.addEventListener("click", function () {
-      if (!video.src) return;
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
+      if (video.paused) video.play().catch(function () {});
+      else video.pause();
     });
     video.addEventListener("play", function () { playBtn.textContent = "Pause"; });
     video.addEventListener("pause", function () { playBtn.textContent = "Play film"; });
