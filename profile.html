@@ -64,12 +64,16 @@
     if (saved) select.value = saved;
 
     function assembled(key) {
-      const parts = window._BP[key];
-      if (parts && parts[0] && parts[1] && parts[2]) {
-        window.BREED_IMGS[key] = parts[0] + parts[1] + parts[2];
-        return true;
+      const parts = (window._BP[key] || []).filter(Boolean);
+      if (parts.length) {
+        const uri = parts.join("");
+        if (uri.indexOf("data:image") === 0 && uri.length > 200) {
+          window.BREED_IMGS[key] = uri;
+          return true;
+        }
       }
-      return !!window.BREED_IMGS[key];
+      const single = window.BREED_IMGS[key];
+      return !!(single && single.indexOf("data:image") === 0 && single.length > 200);
     }
     function apply(key) {
       if (!assembled(key)) return false;
@@ -80,7 +84,7 @@
     function loadScript(src) {
       return new Promise(function (resolve) {
         const s = document.createElement("script");
-        s.src = src;
+        s.src = src + "?v=2";
         s.onload = function () { resolve(true); };
         s.onerror = function () { resolve(false); };
         document.body.appendChild(s);
@@ -89,11 +93,9 @@
     async function load(key) {
       if (!key) { preview.hidden = true; return; }
       if (apply(key)) return;
-      await Promise.all([
-        loadScript("js/" + key + "-1.js"),
-        loadScript("js/" + key + "-2.js"),
-        loadScript("js/" + key + "-3.js")
-      ]);
+      await Promise.all([1,2,3,4].map(function (n) {
+        return loadScript("js/" + key + "-" + n + ".js");
+      }));
       if (apply(key)) return;
       await loadScript("js/" + key + ".js");
       apply(key);
