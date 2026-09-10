@@ -20,52 +20,9 @@
       </div>
     </div>
 
-    <div class="preview family-shot" aria-label="Family and dog in matching SH pyjamas">
-      <svg viewBox="0 0 640 420" role="img" aria-label="Parent, child and dog in matching pyjamas with the SH logo">
-        <defs>
-          <pattern id="pj" width="22" height="26" patternUnits="userSpaceOnUse">
-            <rect width="22" height="26" fill="#f4ead8"/>
-            <path d="M11 5c2 3 5 5 5 9 0 3-2 5-5 5s-5-2-5-5c0-4 3-6 5-9z" fill="#8b5e3c" opacity=".28"/>
-          </pattern>
-        </defs>
-        <rect width="640" height="420" fill="#efe4d2"/>
-        <rect x="0" y="300" width="640" height="120" fill="#e4d5bc"/>
-        <rect x="40" y="210" width="560" height="150" rx="18" fill="#ddd0ba"/>
-        <rect x="56" y="226" width="528" height="70" rx="10" fill="#f7f1e6"/>
-        <rect x="70" y="70" width="90" height="70" rx="6" fill="#d7c4a6"/>
-        <rect x="480" y="56" width="80" height="110" rx="6" fill="#d2c0a4"/>
-        <circle cx="520" cy="48" r="18" fill="#c9b48d"/>
-        <!-- parent -->
-        <ellipse cx="250" cy="168" rx="42" ry="50" fill="#5b3a28"/>
-        <circle cx="250" cy="150" r="28" fill="#c98462"/>
-        <path d="M210 200 h80 l12 110 h-104z" fill="url(#pj)" stroke="#3d5a45" stroke-width="3"/>
-        <circle cx="250" cy="248" r="16" fill="#f6f0e6" stroke="#c4a574" stroke-width="2"/>
-        <text x="250" y="254" text-anchor="middle" font-family="Georgia,serif" font-size="11" font-weight="700" fill="#8b5e3c">SH</text>
-        <path d="M198 310 h104 v40 h-104z" fill="url(#pj)" stroke="#3d5a45" stroke-width="3"/>
-        <!-- child -->
-        <circle cx="355" cy="188" r="22" fill="#d7a07a"/>
-        <ellipse cx="355" cy="178" rx="24" ry="18" fill="#6b4228"/>
-        <path d="M328 210 h54 l8 80 h-70z" fill="url(#pj)" stroke="#3d5a45" stroke-width="3"/>
-        <circle cx="355" cy="246" r="13" fill="#f6f0e6" stroke="#c4a574" stroke-width="2"/>
-        <text x="355" y="251" text-anchor="middle" font-family="Georgia,serif" font-size="9" font-weight="700" fill="#8b5e3c">SH</text>
-        <path d="M322 290 h66 v36 h-66z" fill="url(#pj)" stroke="#3d5a45" stroke-width="3"/>
-        <!-- dog -->
-        <ellipse cx="455" cy="268" rx="48" ry="32" fill="#7a4e32"/>
-        <ellipse cx="430" cy="248" rx="22" ry="20" fill="#8b5a38"/>
-        <ellipse cx="414" cy="236" rx="8" ry="12" fill="#6a3f26"/>
-        <ellipse cx="438" cy="234" rx="8" ry="12" fill="#6a3f26"/>
-        <circle cx="424" cy="246" r="2.2" fill="#2b1a12"/>
-        <ellipse cx="414" cy="254" rx="4" ry="3" fill="#2b1a12"/>
-        <path d="M418 258c6 6 16 6 22 0" fill="none" stroke="#2b1a12" stroke-width="1.4"/>
-        <path d="M420 250 h70 l6 40 h-86z" fill="url(#pj)" stroke="#3d5a45" stroke-width="2.5"/>
-        <circle cx="455" cy="272" r="12" fill="#f6f0e6" stroke="#c4a574" stroke-width="2"/>
-        <text x="455" y="277" text-anchor="middle" font-family="Georgia,serif" font-size="8" font-weight="700" fill="#8b5e3c">SH</text>
-        <ellipse cx="500" cy="300" rx="10" ry="7" fill="#7a4e32"/>
-        <ellipse cx="412" cy="300" rx="10" ry="7" fill="#7a4e32"/>
-      </svg>
+    <div class="preview family-shot">
+      <img id="family-img" alt="Family and dog in matching SH pyjamas" />
     </div>
-
-    <p class="family-caption">Matching family PJs with the SH logo</p>
 
     <label class="breed-label" for="breed">Choose your breed</label>
     <select id="breed">
@@ -93,13 +50,31 @@
     </select>
 
     <button class="btn enter" id="enter" type="button" disabled>Enter the site</button>
-    <p class="hint" id="hint">Pick a breed to continue</p>
   </div>
 
   <script>
+    window._FAM = window._FAM || [];
+    function showFamily() {
+      const parts = (window._FAM || []).filter(Boolean);
+      if (parts.length) {
+        const uri = parts.join("");
+        if (uri.indexOf("data:image") === 0) {
+          document.getElementById("family-img").src = uri;
+        }
+      }
+    }
+    Promise.all([1,2,3,4,5,6].map(function (n) {
+      return new Promise(function (resolve) {
+        const s = document.createElement("script");
+        s.src = "js/family-" + n + ".js?v=1";
+        s.onload = function () { resolve(true); };
+        s.onerror = function () { resolve(false); };
+        document.body.appendChild(s);
+      });
+    })).then(showFamily);
+
     const select = document.getElementById("breed");
     const enter = document.getElementById("enter");
-    const hint = document.getElementById("hint");
     const saved = localStorage.getItem("shd-breed");
     if (saved) select.value = saved;
 
@@ -109,12 +84,10 @@
         localStorage.setItem("shd-breed", key);
         localStorage.setItem("shd-breed-label", select.options[select.selectedIndex].text);
         enter.disabled = false;
-        hint.hidden = true;
       } else {
         localStorage.removeItem("shd-breed");
         localStorage.removeItem("shd-breed-label");
         enter.disabled = true;
-        hint.hidden = false;
       }
     }
     select.addEventListener("change", sync);

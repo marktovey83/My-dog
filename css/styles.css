@@ -132,18 +132,11 @@ footer { padding: 3rem 0; color: #7a6554; font-family: system-ui, sans-serif; fo
   overflow: hidden;
   width: 100%;
 }
-.preview svg { display: block; width: 100%; height: auto; }
-.family-caption {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  font-size: 0.85rem;
-  color: #7a6554;
-}
-.hint {
-  margin: 0;
-  font-family: system-ui, sans-serif;
-  font-size: 0.85rem;
-  color: #7a6554;
+.preview img,
+.preview svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .btn.enter {
   margin: 0.5rem 0 0;
