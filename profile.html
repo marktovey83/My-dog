@@ -8,7 +8,19 @@
 </head>
 <body class="profile-page">
   <div class="wrap profile-wrap">
-    <img id="logo" class="logo" alt="Smart Hazel Designs by Smarty and Hazel" />
+    <div class="logo-lockup" id="logo-wrap" aria-label="Smart Hazel Designs by Smarty and Hazel">
+      <svg class="logo-mark" viewBox="0 0 64 64" width="54" height="54" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#c4a574"/>
+        <path d="M20 36c6-14 18-14 24 0-4-6-8-8-12-8s-8 2-12 8z" fill="#8b5e3c"/>
+        <path d="M32 22c2 6 8 10 8 16 0 6-4 10-8 10s-8-4-8-10c0-6 6-10 8-16z" fill="#f6f0e6"/>
+      </svg>
+      <div>
+        <div class="logo-name">Smart Hazel</div>
+        <div class="logo-sub">Designs</div>
+        <div class="logo-by">by Smarty and Hazel</div>
+      </div>
+    </div>
+    <img id="logo-img" class="logo" alt="Smart Hazel Designs by Smarty and Hazel" hidden />
 
     <label class="breed-label" for="breed">Choose your breed</label>
     <div class="picker">
@@ -46,8 +58,13 @@
   <script src="js/logo.js"></script>
   <script>
     window.BREED_IMGS = window.BREED_IMGS || {};
-    const logo = document.getElementById("logo");
-    if (window.SHD_LOGO) logo.src = window.SHD_LOGO;
+    const logoImg = document.getElementById("logo-img");
+    const logoWrap = document.getElementById("logo-wrap");
+    if (window.SHD_LOGO) {
+      logoImg.src = window.SHD_LOGO;
+      logoImg.hidden = false;
+      logoWrap.hidden = true;
+    }
 
     const select = document.getElementById("breed");
     const preview = document.getElementById("preview");
