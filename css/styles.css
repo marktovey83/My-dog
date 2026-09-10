@@ -28,7 +28,7 @@ header {
   gap: 1rem;
   padding: 1.25rem 0;
 }
-.brand { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hazel); }
+.brand { font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--hazel); font-size: 1.4rem; }
 .brand small { display: block; font-weight: 400; letter-spacing: 0.12em; font-size: 0.7rem; color: var(--green); }
 nav { display: flex; gap: 1rem; font-family: system-ui, sans-serif; font-size: 0.95rem; }
 nav a { color: var(--ink); }
@@ -51,7 +51,10 @@ nav a { color: var(--ink); }
   border-radius: 999px;
   font-family: system-ui, sans-serif;
   margin-right: 0.5rem;
+  border: 0;
+  cursor: pointer;
 }
+.btn[disabled] { opacity: 0.45; cursor: not-allowed; }
 .btn.ghost { background: transparent; color: var(--hazel); border: 1px solid var(--hazel); }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
@@ -81,17 +84,13 @@ footer { padding: 3rem 0; color: #7a6554; font-family: system-ui, sans-serif; fo
   align-items: flex-start;
 }
 .profile-wrap {
-  width: min(720px, calc(100% - 2rem));
+  width: min(640px, calc(100% - 2rem));
   padding: 2.5rem 0 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.25rem;
-}
-.logo {
-  width: min(420px, 90vw);
-  height: auto;
+  gap: 1rem;
 }
 .logo-lockup {
   display: flex;
@@ -101,24 +100,17 @@ footer { padding: 3rem 0; color: #7a6554; font-family: system-ui, sans-serif; fo
   text-align: left;
 }
 .logo-name {
-  font-size: 1.6rem;
-  letter-spacing: 0.08em;
+  font-size: 2.1rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--hazel);
-  line-height: 1.1;
-}
-.logo-sub {
-  font-family: system-ui, sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--green);
+  line-height: 1;
 }
 .logo-by {
   font-family: system-ui, sans-serif;
   font-size: 0.78rem;
   color: #7a6554;
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
 .breed-label {
   font-family: system-ui, sans-serif;
@@ -126,18 +118,11 @@ footer { padding: 3rem 0; color: #7a6554; font-family: system-ui, sans-serif; fo
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--green);
+  margin-top: 0.5rem;
 }
-.picker {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 1rem;
-}
-.picker select {
+.profile-wrap select {
   width: 100%;
   max-width: 28rem;
-  margin: 0 auto;
   font-family: system-ui, sans-serif;
 }
 .preview {
@@ -147,14 +132,21 @@ footer { padding: 3rem 0; color: #7a6554; font-family: system-ui, sans-serif; fo
   overflow: hidden;
   width: 100%;
 }
-.preview img {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+.preview svg { display: block; width: 100%; height: auto; }
+.family-caption {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: #7a6554;
+}
+.hint {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: #7a6554;
 }
 .btn.enter {
-  margin: 1.5rem 0 0;
+  margin: 0.5rem 0 0;
   padding: 0.9rem 1.8rem;
   font-size: 1rem;
 }

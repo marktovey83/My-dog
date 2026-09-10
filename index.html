@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Smart Hazel Designs</title>
+  <title>SH · by Smarty and Hazel</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <div class="wrap">
     <header>
-      <a class="brand" href="index.html">Smart Hazel Designs<small>by Smarty and Hazel</small></a>
+      <a class="brand" href="index.html">SH<small>by Smarty and Hazel</small></a>
       <nav>
         <a href="index.html">Home</a>
         <a href="profile.html">Your dog</a>
@@ -20,19 +20,19 @@
     <section class="hero">
       <p class="tag">Australia · dropship first</p>
       <h1>Looks for every good dog.</h1>
-      <p>Make a profile for your dog, try on a look, then buy toys, treats and gear shipped from Australian suppliers. Named for Smarty and Hazel. Built for yours.</p>
-      <a class="btn" href="profile.html">Start a dog profile</a>
-      <a class="btn ghost" href="shop.html">Browse the shop</a>
+      <p id="welcome">Make a profile for your dog, try on a look, then buy toys, treats and gear shipped from Australian suppliers.</p>
+      <a class="btn" href="shop.html">Browse the shop</a>
+      <a class="btn ghost" href="profile.html">Change breed</a>
     </section>
 
     <div class="grid">
       <article class="card">
         <h3>1. Profile</h3>
-        <p>Name, size, coat and a photo. That is all we need to style a look.</p>
+        <p>Pick your breed at the door. We keep it so the shop can match your dog.</p>
       </article>
       <article class="card">
         <h3>2. Style</h3>
-        <p>Grok-powered outfits on your dog come next. For now, pick a look by hand.</p>
+        <p>Matching family PJs with the SH logo. Grok-styled looks on your dog come next.</p>
       </article>
       <article class="card">
         <h3>3. Shop</h3>
@@ -40,7 +40,14 @@
       </article>
     </div>
 
-    <footer>Smart Hazel Designs · by Smarty and Hazel · Dropshipping only while we start</footer>
+    <footer>SH · by Smarty and Hazel · Dropshipping only while we start</footer>
   </div>
+  <script>
+    const label = localStorage.getItem("shd-breed-label");
+    if (label) {
+      document.getElementById("welcome").textContent =
+        "Welcome. You picked " + label + ". Browse toys, treats and matching gear shipped from Australian suppliers.";
+    }
+  </script>
 </body>
 </html>

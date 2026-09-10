@@ -3,110 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Your dog · Smart Hazel Designs</title>
+  <title>Your dog · SH</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body class="profile-page">
   <div class="wrap profile-wrap">
-    <div class="logo-lockup" aria-label="Smart Hazel Designs by Smarty and Hazel">
-      <svg class="logo-mark" viewBox="0 0 64 64" width="54" height="54" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="#c4a574"/>
-        <path d="M20 36c6-14 18-14 24 0-4-6-8-8-12-8s-8 2-12 8z" fill="#8b5e3c"/>
-        <path d="M32 22c2 6 8 10 8 16 0 6-4 10-8 10s-8-4-8-10c0-6 6-10 8-16z" fill="#f6f0e6"/>
+    <div class="logo-lockup" aria-label="SH by Smarty and Hazel">
+      <svg class="logo-mark sh-mark" viewBox="0 0 72 72" width="72" height="72" aria-hidden="true">
+        <circle cx="36" cy="36" r="34" fill="#c4a574"/>
+        <circle cx="36" cy="36" r="28" fill="#f6f0e6"/>
+        <text x="36" y="44" text-anchor="middle" font-family="Georgia, Times New Roman, serif" font-size="26" font-weight="700" fill="#8b5e3c" letter-spacing="1">SH</text>
       </svg>
       <div>
-        <div class="logo-name">Smart Hazel</div>
-        <div class="logo-sub">Designs</div>
+        <div class="logo-name">SH</div>
         <div class="logo-by">by Smarty and Hazel</div>
       </div>
     </div>
 
-    <label class="breed-label" for="breed">Choose your breed</label>
-    <div class="picker">
-      <select id="breed">
-        <option value="">Select a breed</option>
-        <option value="french-bulldog">French Bulldog</option>
-        <option value="labrador">Labrador Retriever</option>
-        <option value="golden-retriever">Golden Retriever</option>
-        <option value="german-shepherd">German Shepherd</option>
-        <option value="poodle">Poodle</option>
-        <option value="bulldog">Bulldog</option>
-        <option value="beagle">Beagle</option>
-        <option value="rottweiler">Rottweiler</option>
-        <option value="german-shorthaired-pointer">German Shorthaired Pointer</option>
-        <option value="dachshund">Dachshund</option>
-        <option value="corgi">Pembroke Welsh Corgi</option>
-        <option value="australian-shepherd">Australian Shepherd</option>
-        <option value="yorkshire-terrier">Yorkshire Terrier</option>
-        <option value="cavalier">Cavalier King Charles Spaniel</option>
-        <option value="doberman">Doberman Pinscher</option>
-        <option value="boxer">Boxer</option>
-        <option value="miniature-schnauzer">Miniature Schnauzer</option>
-        <option value="border-collie">Border Collie</option>
-        <option value="siberian-husky">Siberian Husky</option>
-        <option value="shih-tzu">Shih Tzu</option>
-      </select>
-      <div class="preview" id="preview" hidden>
-        <img id="preview-img" alt="Matching family pyjamas" />
-      </div>
+    <div class="preview family-shot" aria-label="Family and dog in matching SH pyjamas">
+      <svg viewBox="0 0 640 420" role="img" aria-label="Parent, child and dog in matching pyjamas with the SH logo">
+        <defs>
+          <pattern id="pj" width="22" height="26" patternUnits="userSpaceOnUse">
+            <rect width="22" height="26" fill="#f4ead8"/>
+            <path d="M11 5c2 3 5 5 5 9 0 3-2 5-5 5s-5-2-5-5c0-4 3-6 5-9z" fill="#8b5e3c" opacity=".28"/>
+          </pattern>
+        </defs>
+        <rect width="640" height="420" fill="#efe4d2"/>
+        <rect x="0" y="300" width="640" height="120" fill="#e4d5bc"/>
+        <rect x="40" y="210" width="560" height="150" rx="18" fill="#ddd0ba"/>
+        <rect x="56" y="226" width="528" height="70" rx="10" fill="#f7f1e6"/>
+        <rect x="70" y="70" width="90" height="70" rx="6" fill="#d7c4a6"/>
+        <rect x="480" y="56" width="80" height="110" rx="6" fill="#d2c0a4"/>
+        <circle cx="520" cy="48" r="18" fill="#c9b48d"/>
+        <!-- parent -->
+        <ellipse cx="250" cy="168" rx="42" ry="50" fill="#5b3a28"/>
+        <circle cx="250" cy="150" r="28" fill="#c98462"/>
+        <path d="M210 200 h80 l12 110 h-104z" fill="url(#pj)" stroke="#3d5a45" stroke-width="3"/>
+        <circle cx="250" cy="248" r="16" fill="#f6f0e6" stroke="#c4a574" stroke-width="2"/>
+        <text x="250" y="254" text-anchor="middle" font-family="Georgia,serif" font-size="11" font-weight="700" fill="#8b5e3c">SH</text>
+        <path d="M198 310 h104 v40 h-104z" fill="url(#pj)" stroke="#3d5a45" stroke-width="3"/>
+        <!-- child -->
+        <circle cx="355" cy="188" r="22" fill="#d7a07a"/>
+        <ellipse cx="355" cy="178" rx="24" ry="18" fill="#6b4228"/>
+        <path d="M328 210 h54 l8 80 h-70z" fill="url(#pj)" stroke="#3d5a45" stroke-width="3"/>
+        <circle cx="355" cy="246" r="13" fill="#f6f0e6" stroke="#c4a574" stroke-width="2"/>
+        <text x="355" y="251" text-anchor="middle" font-family="Georgia,serif" font-size="9" font-weight="700" fill="#8b5e3c">SH</text>
+        <path d="M322 290 h66 v36 h-66z" fill="url(#pj)" stroke="#3d5a45" stroke-width="3"/>
+        <!-- dog -->
+        <ellipse cx="455" cy="268" rx="48" ry="32" fill="#7a4e32"/>
+        <ellipse cx="430" cy="248" rx="22" ry="20" fill="#8b5a38"/>
+        <ellipse cx="414" cy="236" rx="8" ry="12" fill="#6a3f26"/>
+        <ellipse cx="438" cy="234" rx="8" ry="12" fill="#6a3f26"/>
+        <circle cx="424" cy="246" r="2.2" fill="#2b1a12"/>
+        <ellipse cx="414" cy="254" rx="4" ry="3" fill="#2b1a12"/>
+        <path d="M418 258c6 6 16 6 22 0" fill="none" stroke="#2b1a12" stroke-width="1.4"/>
+        <path d="M420 250 h70 l6 40 h-86z" fill="url(#pj)" stroke="#3d5a45" stroke-width="2.5"/>
+        <circle cx="455" cy="272" r="12" fill="#f6f0e6" stroke="#c4a574" stroke-width="2"/>
+        <text x="455" y="277" text-anchor="middle" font-family="Georgia,serif" font-size="8" font-weight="700" fill="#8b5e3c">SH</text>
+        <ellipse cx="500" cy="300" rx="10" ry="7" fill="#7a4e32"/>
+        <ellipse cx="412" cy="300" rx="10" ry="7" fill="#7a4e32"/>
+      </svg>
     </div>
 
-    <a class="btn enter" href="index.html">Enter the site</a>
+    <p class="family-caption">Matching family PJs with the SH logo</p>
+
+    <label class="breed-label" for="breed">Choose your breed</label>
+    <select id="breed">
+      <option value="">Select a breed</option>
+      <option value="french-bulldog">French Bulldog</option>
+      <option value="labrador">Labrador Retriever</option>
+      <option value="golden-retriever">Golden Retriever</option>
+      <option value="german-shepherd">German Shepherd</option>
+      <option value="poodle">Poodle</option>
+      <option value="bulldog">Bulldog</option>
+      <option value="beagle">Beagle</option>
+      <option value="rottweiler">Rottweiler</option>
+      <option value="german-shorthaired-pointer">German Shorthaired Pointer</option>
+      <option value="dachshund">Dachshund</option>
+      <option value="corgi">Pembroke Welsh Corgi</option>
+      <option value="australian-shepherd">Australian Shepherd</option>
+      <option value="yorkshire-terrier">Yorkshire Terrier</option>
+      <option value="cavalier">Cavalier King Charles Spaniel</option>
+      <option value="doberman">Doberman Pinscher</option>
+      <option value="boxer">Boxer</option>
+      <option value="miniature-schnauzer">Miniature Schnauzer</option>
+      <option value="border-collie">Border Collie</option>
+      <option value="siberian-husky">Siberian Husky</option>
+      <option value="shih-tzu">Shih Tzu</option>
+    </select>
+
+    <button class="btn enter" id="enter" type="button" disabled>Enter the site</button>
+    <p class="hint" id="hint">Pick a breed to continue</p>
   </div>
 
   <script>
-    window.BREED_IMGS = window.BREED_IMGS || {};
-    window._BP = window._BP || {};
     const select = document.getElementById("breed");
-    const preview = document.getElementById("preview");
-    const img = document.getElementById("preview-img");
+    const enter = document.getElementById("enter");
+    const hint = document.getElementById("hint");
     const saved = localStorage.getItem("shd-breed");
     if (saved) select.value = saved;
 
-    function assembled(key) {
-      const parts = (window._BP[key] || []).filter(Boolean);
-      if (parts.length) {
-        const uri = parts.join("");
-        if (uri.indexOf("data:image") === 0 && uri.length > 200) {
-          window.BREED_IMGS[key] = uri;
-          return true;
-        }
-      }
-      const single = window.BREED_IMGS[key];
-      return !!(single && single.indexOf("data:image") === 0 && single.length > 200);
-    }
-    function apply(key) {
-      if (!assembled(key)) return false;
-      img.src = window.BREED_IMGS[key];
-      preview.hidden = false;
-      return true;
-    }
-    function loadScript(src) {
-      return new Promise(function (resolve) {
-        const s = document.createElement("script");
-        s.src = src + "?v=2";
-        s.onload = function () { resolve(true); };
-        s.onerror = function () { resolve(false); };
-        document.body.appendChild(s);
-      });
-    }
-    async function load(key) {
-      if (!key) { preview.hidden = true; return; }
-      if (apply(key)) return;
-      await Promise.all([1,2,3,4].map(function (n) {
-        return loadScript("js/" + key + "-" + n + ".js");
-      }));
-      if (apply(key)) return;
-      await loadScript("js/" + key + ".js");
-      apply(key);
-    }
-    function show() {
+    function sync() {
       const key = select.value;
-      localStorage.setItem("shd-breed", key);
-      load(key);
+      if (key) {
+        localStorage.setItem("shd-breed", key);
+        localStorage.setItem("shd-breed-label", select.options[select.selectedIndex].text);
+        enter.disabled = false;
+        hint.hidden = true;
+      } else {
+        localStorage.removeItem("shd-breed");
+        localStorage.removeItem("shd-breed-label");
+        enter.disabled = true;
+        hint.hidden = false;
+      }
     }
-    select.addEventListener("change", show);
-    show();
+    select.addEventListener("change", sync);
+    enter.addEventListener("click", function () {
+      if (!select.value) return;
+      window.location.href = "index.html";
+    });
+    sync();
   </script>
 </body>
 </html>
