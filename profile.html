@@ -8,7 +8,18 @@
 </head>
 <body class="profile-page">
   <div class="wrap profile-wrap">
-    <img class="logo" src="img/logo.jpg" alt="Smart Hazel Designs by Smarty and Hazel" />
+    <div class="logo-lockup" aria-label="Smart Hazel Designs by Smarty and Hazel">
+      <svg class="logo-mark" viewBox="0 0 64 64" width="54" height="54" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="#c4a574"/>
+        <path d="M20 36c6-14 18-14 24 0-4-6-8-8-12-8s-8 2-12 8z" fill="#8b5e3c"/>
+        <path d="M32 22c2 6 8 10 8 16 0 6-4 10-8 10s-8-4-8-10c0-6 6-10 8-16z" fill="#f6f0e6"/>
+      </svg>
+      <div>
+        <div class="logo-name">Smart Hazel</div>
+        <div class="logo-sub">Designs</div>
+        <div class="logo-by">by Smarty and Hazel</div>
+      </div>
+    </div>
 
     <label class="breed-label" for="breed">Choose your breed</label>
     <div class="picker">
@@ -56,12 +67,13 @@
     function show() {
       const key = select.value;
       localStorage.setItem("shd-breed", key);
-      if (key && window.BREED_IMGS && window.BREED_IMGS[key]) {
+      if (!key) { preview.hidden = true; return; }
+      if (window.BREED_IMGS && window.BREED_IMGS[key]) {
         img.src = window.BREED_IMGS[key];
-        preview.hidden = false;
       } else {
-        preview.hidden = true;
+        img.src = "img/" + key + ".jpg";
       }
+      preview.hidden = false;
     }
     select.addEventListener("change", show);
     show();
