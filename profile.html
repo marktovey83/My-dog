@@ -44,11 +44,8 @@
   </div>
 
   <script src="js/logo.js"></script>
-  <script src="js/breeds-1.js"></script>
-  <script src="js/breeds-2.js"></script>
-  <script src="js/breeds-3.js"></script>
-  <script src="js/breeds-4.js"></script>
   <script>
+    window.BREED_IMGS = window.BREED_IMGS || {};
     const logo = document.getElementById("logo");
     if (window.SHD_LOGO) logo.src = window.SHD_LOGO;
 
@@ -58,19 +55,29 @@
     const saved = localStorage.getItem("shd-breed");
     if (saved) select.value = saved;
 
+    const loading = {};
+    function apply(key) {
+      if (window.BREED_IMGS[key]) {
+        img.src = window.BREED_IMGS[key];
+        preview.hidden = false;
+      }
+    }
+    function load(key) {
+      if (!key) { preview.hidden = true; return; }
+      if (window.BREED_IMGS[key]) { apply(key); return; }
+      if (loading[key]) return;
+      loading[key] = true;
+      const s = document.createElement("script");
+      s.src = "js/" + key + ".js";
+      s.onload = function () { apply(key); };
+      s.onerror = function () { preview.hidden = true; };
+      document.body.appendChild(s);
+    }
     function show() {
       const key = select.value;
       localStorage.setItem("shd-breed", key);
-      if (!key) {
-        preview.hidden = true;
-        return;
-      }
-      if (window.BREED_IMGS && window.BREED_IMGS[key]) {
-        img.src = window.BREED_IMGS[key];
-      }
-      preview.hidden = false;
+      load(key);
     }
-
     select.addEventListener("change", show);
     show();
   </script>
