@@ -8,7 +8,7 @@
 </head>
 <body class="profile-page">
   <div class="wrap profile-wrap">
-    <div class="logo-lockup" id="logo-wrap" aria-label="Smart Hazel Designs by Smarty and Hazel">
+    <div class="logo-lockup" aria-label="Smart Hazel Designs by Smarty and Hazel">
       <svg class="logo-mark" viewBox="0 0 64 64" width="54" height="54" aria-hidden="true">
         <circle cx="32" cy="32" r="30" fill="#c4a574"/>
         <path d="M20 36c6-14 18-14 24 0-4-6-8-8-12-8s-8 2-12 8z" fill="#8b5e3c"/>
@@ -20,7 +20,6 @@
         <div class="logo-by">by Smarty and Hazel</div>
       </div>
     </div>
-    <img id="logo-img" class="logo" alt="Smart Hazel Designs by Smarty and Hazel" hidden />
 
     <label class="breed-label" for="breed">Choose your breed</label>
     <div class="picker">
@@ -55,40 +54,49 @@
     <a class="btn enter" href="index.html">Enter the site</a>
   </div>
 
-  <script src="js/logo.js"></script>
   <script>
     window.BREED_IMGS = window.BREED_IMGS || {};
-    const logoImg = document.getElementById("logo-img");
-    const logoWrap = document.getElementById("logo-wrap");
-    if (window.SHD_LOGO) {
-      logoImg.src = window.SHD_LOGO;
-      logoImg.hidden = false;
-      logoWrap.hidden = true;
-    }
-
+    window._BP = window._BP || {};
     const select = document.getElementById("breed");
     const preview = document.getElementById("preview");
     const img = document.getElementById("preview-img");
     const saved = localStorage.getItem("shd-breed");
     if (saved) select.value = saved;
 
-    const loading = {};
-    function apply(key) {
-      if (window.BREED_IMGS[key]) {
-        img.src = window.BREED_IMGS[key];
-        preview.hidden = false;
+    function assembled(key) {
+      const parts = window._BP[key];
+      if (parts && parts[0] && parts[1] && parts[2]) {
+        window.BREED_IMGS[key] = parts[0] + parts[1] + parts[2];
+        return true;
       }
+      return !!window.BREED_IMGS[key];
     }
-    function load(key) {
+    function apply(key) {
+      if (!assembled(key)) return false;
+      img.src = window.BREED_IMGS[key];
+      preview.hidden = false;
+      return true;
+    }
+    function loadScript(src) {
+      return new Promise(function (resolve) {
+        const s = document.createElement("script");
+        s.src = src;
+        s.onload = function () { resolve(true); };
+        s.onerror = function () { resolve(false); };
+        document.body.appendChild(s);
+      });
+    }
+    async function load(key) {
       if (!key) { preview.hidden = true; return; }
-      if (window.BREED_IMGS[key]) { apply(key); return; }
-      if (loading[key]) return;
-      loading[key] = true;
-      const s = document.createElement("script");
-      s.src = "js/" + key + ".js";
-      s.onload = function () { apply(key); };
-      s.onerror = function () { preview.hidden = true; };
-      document.body.appendChild(s);
+      if (apply(key)) return;
+      await Promise.all([
+        loadScript("js/" + key + "-1.js"),
+        loadScript("js/" + key + "-2.js"),
+        loadScript("js/" + key + "-3.js")
+      ]);
+      if (apply(key)) return;
+      await loadScript("js/" + key + ".js");
+      apply(key);
     }
     function show() {
       const key = select.value;
