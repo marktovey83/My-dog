@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your dog · Smart Hazel Designs</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="index.html">Smart Hazel Designs<small>by Smarty and Hazel</small></a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="profile.html">Your dog</a>
+        <a href="shop.html">Shop</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <p class="tag">Dog profile</p>
+      <h1>Tell us about your dog.</h1>
+      <p>Saved in this browser for now. Later this becomes an account and the photo is used to try clothes on.</p>
+
+      <form id="dog-form">
+        <input name="name" placeholder="Dog name" required />
+        <select name="size">
+          <option>Small</option>
+          <option selected>Medium</option>
+          <option>Large</option>
+        </select>
+        <input name="coat" placeholder="Coat colour, e.g. hazel brown" />
+        <textarea name="notes" rows="3" placeholder="Anything we should know"></textarea>
+        <button class="btn" type="submit">Save profile</button>
+      </form>
+      <p id="saved" hidden>Saved. Next step is the shop.</p>
+    </section>
+
+    <footer>Smart Hazel Designs</footer>
+  </div>
+  <script>
+    const form = document.getElementById("dog-form");
+    const saved = document.getElementById("saved");
+    const existing = localStorage.getItem("shd-dog");
+    if (existing) {
+      const data = JSON.parse(existing);
+      Object.entries(data).forEach(([k, v]) => {
+        if (form.elements[k]) form.elements[k].value = v;
+      });
+    }
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      localStorage.setItem("shd-dog", JSON.stringify(data));
+      saved.hidden = false;
+    });
+  </script>
+</body>
+</html>
